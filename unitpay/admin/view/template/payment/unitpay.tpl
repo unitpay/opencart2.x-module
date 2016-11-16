@@ -98,6 +98,38 @@
 
 
           <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-error_status"><?php echo $entry_set_status_after_error_payment; ?></label>
+            <div class="col-sm-10">
+              <select name="config_unitpay_set_error_status" id="input-error_status" class="form-control">
+                <?php if ($config_unitpay_set_error_status) { ?>
+                <option value="1" selected="selected"><?php echo $text_enabled; ?></option>
+                <option value="0"><?php echo $text_disabled; ?></option>
+                <?php } else { ?>
+                <option value="1"><?php echo $text_enabled; ?></option>
+                <option value="0" selected="selected"><?php echo $text_disabled; ?></option>
+                <?php } ?>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-order_status_error_payment"><?php echo $entry_order_status_error; ?></label>
+            <div class="col-sm-10">
+              <select name="config_unitpay_order_status_id_error" id="input-order_status_error_payment" class="form-control">
+                <?php foreach ($order_statuses as $order_status) { ?>
+                <?php if ($order_status['order_status_id'] == $config_unitpay_order_status_id_error) { ?>
+                <option value="<?php echo $order_status['order_status_id']; ?>" selected="selected"><?php echo $order_status['name']; ?></option>
+                <?php } else { ?>
+                <option value="<?php echo $order_status['order_status_id']; ?>"><?php echo $order_status['name']; ?></option>
+                <?php } ?>
+                <?php } ?>
+              </select>
+            </div>
+          </div>
+
+
+
+          <div class="form-group">
             <label class="col-sm-2 control-label" for="input-delete_cart"><?php echo $entry_delete_cart_after_confirm; ?></label>
             <div class="col-sm-10">
               <select name="config_unitpay_cart_reset" id="input-delete_cart" class="form-control">

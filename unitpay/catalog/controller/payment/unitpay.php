@@ -111,6 +111,18 @@ class ControllerPaymentUnitpay extends Controller {
             return $this->getResponseSuccess('PAY is successful');
         }
 
+        if ($method == 'error'){
+            if (!$arOrder){
+                return $this->getResponseError('Unable to confirm payment database');
+            }
+
+            if ($this->config->get('config_unitpay_set_error_status')){
+                $this->error($params);
+            }
+
+            return $this->getResponseSuccess('ERROR is successful');
+        }
+
         return $this->getResponseError($method.' not supported');
     }
 
@@ -176,6 +188,11 @@ class ControllerPaymentUnitpay extends Controller {
     private function pay($params){
         $new_order_status_id = $this->config->get('config_unitpay_order_status_id_after_pay');
         $this->model_checkout_order->addOrderHistory($params['account'], $new_order_status_id, 'оплата через UnitPay', true);
+    }
+
+    private function error($params){
+        $new_order_status_id = $this->config->get('config_unitpay_order_status_id_error');
+        $this->model_checkout_order->addOrderHistory($params['account'], $new_order_status_id, 'ошибка при оплате через UnitPay', false);
     }
 }
 ?>
