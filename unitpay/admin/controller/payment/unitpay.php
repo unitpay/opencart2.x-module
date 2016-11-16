@@ -11,7 +11,7 @@ class ControllerPaymentUnitpay extends Controller {
 		$this->load->model('setting/setting');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && ($this->validate())) {
-			$this->model_setting_setting->editSetting('unitpay', $this->request->post);
+			$this->model_setting_setting->editSetting('config_unitpay', $this->request->post);
 
 			$this->session->data['success'] = $this->language->get('text_success');
 			if (isset($this->request->post['save_stay']) && $this->request->post['save_stay']){
@@ -45,9 +45,10 @@ class ControllerPaymentUnitpay extends Controller {
 		$data['copy_success_url']	= HTTP_CATALOG . 'index.php?route=checkout/success';
 		$data['copy_fail_url'] 	= HTTP_CATALOG . 'index.php?route=checkout/failure';
 
-		
-
-		$data['entry_order_status'] = $this->language->get('entry_order_status');
+		$data['entry_order_status_after_pay'] = $this->language->get('entry_order_status_after_pay');
+		$data['entry_order_status_after_create'] = $this->language->get('entry_order_status_after_create');
+		$data['entry_delete_cart_after_confirm'] = $this->language->get('entry_delete_cart_after_confirm');
+		$data['entry_set_status_after_create'] = $this->language->get('entry_set_status_after_create');
 		$data['entry_geo_zone'] = $this->language->get('entry_geo_zone');
 		$data['entry_status'] = $this->language->get('entry_status');
 		$data['entry_sort_order'] = $this->language->get('entry_sort_order');
@@ -78,7 +79,6 @@ class ControllerPaymentUnitpay extends Controller {
 			$data['error_password1'] = '';
 		}
 
-
 		
 		$data['action'] = $this->url->link('payment/unitpay', 'token=' . $this->session->data['token'], 'SSL');
 		$data['update'] = $this->url->link('payment/unitpay', 'token=' . $this->session->data['token'], 'SSL');
@@ -105,56 +105,24 @@ class ControllerPaymentUnitpay extends Controller {
       		'separator' => ' :: '
    		);
 
-
 		//
-		if (isset($this->request->post['unitpay_login'])) {
-			$data['unitpay_login'] = $this->request->post['unitpay_login'];
-		} else {
-			$data['unitpay_login'] = $this->config->get('unitpay_login');
-		}
-
-
-		//
-		if (isset($this->request->post['unitpay_key'])) {
-			$data['unitpay_key'] = $this->request->post['unitpay_key'];
-		} else {
-			$data['unitpay_key'] = $this->config->get('unitpay_key');
-		}
-
-		
-		if (isset($this->request->post['unitpay_order_status_id'])) {
-			$data['unitpay_order_status_id'] = $this->request->post['unitpay_order_status_id'];
-		} else {
-			$data['unitpay_order_status_id'] = $this->config->get('unitpay_order_status_id');
-		}
+		$data['config_unitpay_login'] = $this->config->get('config_unitpay_login');
+		$data['config_unitpay_key'] = $this->config->get('config_unitpay_key');
+		$data['config_unitpay_order_status_id_after_create'] = $this->config->get('config_unitpay_order_status_id_after_create');
+		$data['config_unitpay_order_status_id_after_pay'] = $this->config->get('config_unitpay_order_status_id_after_pay');
+		$data['config_unitpay_create_order'] = $this->config->get('config_unitpay_create_order');
+		$data['config_unitpay_cart_reset'] = $this->config->get('config_unitpay_cart_reset');
+		$data['config_unitpay_geo_zone_id'] = $this->config->get('config_unitpay_geo_zone_id');
+		$data['config_unitpay_status'] = $this->config->get('config_unitpay_status');
 
 		$this->load->model('localisation/order_status');
 
 		$data['order_statuses'] = $this->model_localisation_order_status->getOrderStatuses();
 
-		if (isset($this->request->post['unitpay_geo_zone_id'])) {
-			$data['unitpay_geo_zone_id'] = $this->request->post['unitpay_geo_zone_id'];
-		} else {
-			$data['unitpay_geo_zone_id'] = $this->config->get('unitpay_geo_zone_id');
-		}
-
 		$this->load->model('localisation/geo_zone');
 
 		$data['geo_zones'] = $this->model_localisation_geo_zone->getGeoZones();
 
-		if (isset($this->request->post['unitpay_status'])) {
-			$data['unitpay_status'] = $this->request->post['unitpay_status'];
-		} else {
-			$data['unitpay_status'] = $this->config->get('unitpay_status');
-		}
-
-		if (isset($this->request->post['unitpay_sort_order'])) {
-			$data['unitpay_sort_order'] = $this->request->post['unitpay_sort_order'];
-		} else {
-			$data['unitpay_sort_order'] = $this->config->get('unitpay_sort_order');
-		}
-
-	
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
@@ -168,14 +136,14 @@ class ControllerPaymentUnitpay extends Controller {
 			$this->error['warning'] = $this->language->get('error_permission');
 		}
 		
-		if (!$this->request->post['unitpay_login']) {
+		if (!$this->request->post['config_unitpay_login']) {
 			$this->error['login'] = $this->language->get('error_login');
 		}
 
-		if (!$this->request->post['unitpay_key']) {
+		if (!$this->request->post['config_unitpay_key']) {
 			$this->error['password1'] = $this->language->get('error_password1');
 		}
-		// return !$this->error;
+		
 		if (!$this->error) {
 			return TRUE;
 		} else {

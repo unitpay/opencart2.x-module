@@ -1,27 +1,27 @@
 <?php
-$_ = array_merge(
-  (isset($_)?$_:array()),
-  array (
-  'heading_title' 		  => 'UnitPay v.1.2',
-  'text_payment'		    => 'Оплата',
-  'text_success'	   	  => 'Настройки модуля UnitPay обновлены!',
-  'text_yes' 			      => 'Да',
-  'text_no' 			      => 'Нет',
-  'entry_login' 		    => 'Публичный ключ:',
-  'entry_unitpay_key' 	=> 'Секретный ключ:',
-  'entry_order_status' 	=> 'Статус заказа после оплаты:',
-  'entry_geo_zone' 		  => 'Географическая зона:',
-  'entry_status' 		    => 'Статус:',
-  'entry_sort_order' 	  => 'Порядок сортировки:',
-  'error_permission' 	  => 'У Вас нет прав для управления этим модулем!',
-  'error_login' 		    => 'Требуется ввести публичный ключ!',
-  'error_password1'     => 'Требуется ввести секретный ключ!',
-  'text_result_url'     => 'Result URL',
-  'text_success_url'    => 'Success URL',
-  'text_fail_url'       => 'Fail URL',
-  'text_edit'           => 'Настройка модуля UnitPay',
-  'text_save_and_stay'  => 'Сохранить и остаться',
-  'text_copyright'      => 'Разработано для UnitPay компанией Бизнес-Лидер (opencart.ru)',
+// Heading
+$_['heading_title']      	= 'UnitPay';
 
-));
+// Text
+$_['text_payment']       	= 'Оплата';
+$_['text_success']       	= 'Настройки модуля UnitPay обновлены!';
+$_['text_yes']           	= 'Да';
+$_['text_no']           	= 'Нет';
+$_['text_edit']           	= 'Настройка модуля UnitPay';
+$_['text_save_and_stay']    = 'Сохранить и остаться';
 
+// Entry
+$_['entry_login']        	= 'Публичный ключ:';
+$_['entry_unitpay_key']    	= 'Секретный ключ:';
+
+$_['entry_order_status_after_pay']      = 'Статус заказа после оплаты:';
+$_['entry_order_status_after_create']   = 'Статус заказа после создания:';
+$_['entry_delete_cart_after_confirm']   = 'Очищать корзину после создания заказа';
+$_['entry_set_status_after_create']     = 'Устанавливать статус заказа после создания';
+$_['entry_geo_zone']     	            = 'Географическая зона:';
+$_['entry_status']      	            = 'Статус:';
+$_['entry_sort_order']   	            = 'Порядок сортировки:';
+
+$_['error_permission']   	= 'У Вас нет прав для управления этим модулем!';
+$_['error_login']        	= 'Требуется ввести публичный ключ!';
+$_['error_password1']   	= 'Требуется ввести секретный ключ!';

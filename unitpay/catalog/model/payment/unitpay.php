@@ -3,10 +3,10 @@ class ModelPaymentUnitpay extends Model {
 	public function getMethod($address) {
 		$this->load->language('payment/unitpay');
 
-		if ($this->config->get('unitpay_status')) {
-			$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "zone_to_geo_zone WHERE geo_zone_id = '" . (int)$this->config->get('unitpay_geo_zone_id') . "' AND country_id = '" . (int)$address['country_id'] . "' AND (zone_id = '" . (int)$address['zone_id'] . "' OR zone_id = '0')");
+		if ($this->config->get('config_unitpay_status')) {
+			$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "zone_to_geo_zone WHERE geo_zone_id = '" . (int)$this->config->get('config_unitpay_geo_zone_id') . "' AND country_id = '" . (int)$address['country_id'] . "' AND (zone_id = '" . (int)$address['zone_id'] . "' OR zone_id = '0')");
 
-			if (!$this->config->get('unitpay_geo_zone_id')) {
+			if (!$this->config->get('config_unitpay_geo_zone_id')) {
 				$status = TRUE;
 			} elseif ($query->num_rows) {
 				$status = TRUE;
@@ -24,7 +24,7 @@ class ModelPaymentUnitpay extends Model {
 				'code'         => 'unitpay',
 				'title'      => $this->language->get('text_title'),
 				'terms'      => '',
-				'sort_order' => $this->config->get('unitpay_sort_order')
+				'sort_order' => 0
 			);
 		}
 
