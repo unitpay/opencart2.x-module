@@ -9,9 +9,9 @@ class ControllerPaymentUnitpay extends Controller {
         $this->load->model('checkout/order');
         $order_info = $this->model_checkout_order->getOrder($this->session->data['order_id']);
 
-        $data['config_unitpay_login'] = $this->config->get('config_unitpay_login');
-        $data['config_unitpay_key']= $this->config->get('config_unitpay_key');
-        $data['success_url']= $this->config->get('config_unitpay_success_url');
+        $data['unitpay_login'] = $this->config->get('unitpay_login');
+        $data['unitpay_key']= $this->config->get('unitpay_key');
+        $data['success_url']= $this->config->get('unitpay_success_url');
         // Номер заказа
         $data['inv_id'] = $this->session->data['order_id'];
 
@@ -30,11 +30,11 @@ class ControllerPaymentUnitpay extends Controller {
         //$data['encoding'] = "utf-8";
 
         $data['merchant_url'] = $data['action'] .
-            $data['config_unitpay_login'] .
+            $data['unitpay_login'] .
             '?sum='			. $data['out_summ'] .
             '&account='		. $data['inv_id']	.
             '&desc='        . $data['inv_desc'] .
-            '&unitpay_login='		. $data['config_unitpay_login'] .
+            '&unitpay_login='		. $data['unitpay_login'] .
             '&resultUrl=' .  $data['success_url'];
 
 //tesrt
@@ -73,7 +73,7 @@ class ControllerPaymentUnitpay extends Controller {
 
 
         if ($params['signature'] != $this->getSha256SignatureByMethodAndParams(
-                $method, $params, $this->config->get('config_unitpay_key'))) {
+                $method, $params, $this->config->get('unitpay_key'))) {
             return $this->getResponseError('Incorrect digital signature');
         }
 
@@ -98,7 +98,7 @@ class ControllerPaymentUnitpay extends Controller {
         }
 
         if ($method == 'pay'){
-            if ($arOrder && $arOrder['order_status_id'] == $this->config->get('config_unitpay_order_status_id_after_pay')){
+            if ($arOrder && $arOrder['order_status_id'] == $this->config->get('unitpay_order_status_id_after_pay')){
                 return $this->getResponseSuccess('Payment has already been paid');
             }
 
@@ -116,7 +116,7 @@ class ControllerPaymentUnitpay extends Controller {
                 return $this->getResponseError('Unable to confirm payment database');
             }
 
-            if ($this->config->get('config_unitpay_set_error_status')){
+            if ($this->config->get('unitpay_set_error_status')){
                 $this->error($params);
             }
 
@@ -129,8 +129,8 @@ class ControllerPaymentUnitpay extends Controller {
     public function confirm()
     {
         $this->load->model('checkout/order');
-        if ($this->config->get('config_unitpay_create_order')=='1') $this->model_checkout_order->addOrderHistory($this->session->data['order_id'], $this->config->get('config_unitpay_order_status_id_after_create'), '', true);
-        if ($this->config->get('config_unitpay_cart_reset')=='1') $this->cart->clear();
+        if ($this->config->get('unitpay_create_order')=='1') $this->model_checkout_order->addOrderHistory($this->session->data['order_id'], $this->config->get('unitpay_order_status_id_after_create'), '', true);
+        if ($this->config->get('unitpay_cart_reset')=='1') $this->cart->clear();
     }
 
 
@@ -186,12 +186,12 @@ class ControllerPaymentUnitpay extends Controller {
     }
 
     private function pay($params){
-        $new_order_status_id = $this->config->get('config_unitpay_order_status_id_after_pay');
+        $new_order_status_id = $this->config->get('unitpay_order_status_id_after_pay');
         $this->model_checkout_order->addOrderHistory($params['account'], $new_order_status_id, 'оплата через UnitPay', true);
     }
 
     private function error($params){
-        $new_order_status_id = $this->config->get('config_unitpay_order_status_id_error');
+        $new_order_status_id = $this->config->get('unitpay_order_status_id_error');
         $this->model_checkout_order->addOrderHistory($params['account'], $new_order_status_id, 'ошибка при оплате через UnitPay', false);
     }
 }

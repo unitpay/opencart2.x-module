@@ -40,23 +40,23 @@
           <div class="form-group required">
             <label class="col-sm-2 control-label" for="input-login"><?php echo $entry_login; ?></label>
             <div class="col-sm-10">
-              <input type="text" name="config_unitpay_login" value="<?php echo $config_unitpay_login; ?>" placeholder="<?php echo $entry_login; ?>" id="input-login" class="form-control" />
+              <input type="text" name="unitpay_login" value="<?php echo $unitpay_login; ?>" placeholder="<?php echo $entry_login; ?>" id="input-login" class="form-control" />
             </div>
           </div>
 
           <div class="form-group required">
             <label class="col-sm-2 control-label" for="input-unitpay_key"><?php echo $entry_unitpay_key; ?></label>
             <div class="col-sm-10">
-              <input type="text" name="config_unitpay_key" value="<?php echo $config_unitpay_key; ?>" placeholder="<?php echo $entry_unitpay_key; ?>" id="input-unitpay_key" class="form-control" />
+              <input type="text" name="unitpay_key" value="<?php echo $unitpay_key; ?>" placeholder="<?php echo $entry_unitpay_key; ?>" id="input-unitpay_key" class="form-control" />
             </div>
           </div>
 
           <div class="form-group">
             <label class="col-sm-2 control-label" for="input-order_status_after_pay"><?php echo $entry_order_status_after_pay; ?></label>
             <div class="col-sm-10">
-              <select name="config_unitpay_order_status_id_after_pay" id="input-order_status_after_pay" class="form-control">
+              <select name="unitpay_order_status_id_after_pay" id="input-order_status_after_pay" class="form-control">
               <?php foreach ($order_statuses as $order_status) { ?>
-                <?php if ($order_status['order_status_id'] == $config_unitpay_order_status_id_after_pay) { ?>
+                <?php if ($order_status['order_status_id'] == $unitpay_order_status_id_after_pay) { ?>
                 <option value="<?php echo $order_status['order_status_id']; ?>" selected="selected"><?php echo $order_status['name']; ?></option>
                 <?php } else { ?>
                 <option value="<?php echo $order_status['order_status_id']; ?>"><?php echo $order_status['name']; ?></option>
@@ -69,8 +69,8 @@
           <div class="form-group">
             <label class="col-sm-2 control-label" for="input-create_order"><?php echo $entry_set_status_after_create; ?></label>
             <div class="col-sm-10">
-              <select name="config_unitpay_create_order" id="input-create_order" class="form-control">
-                <?php if ($config_unitpay_create_order) { ?>
+              <select name="unitpay_create_order" id="input-create_order" class="form-control">
+                <?php if ($unitpay_create_order) { ?>
                 <option value="1" selected="selected"><?php echo $text_enabled; ?></option>
                 <option value="0"><?php echo $text_disabled; ?></option>
                 <?php } else { ?>
@@ -84,9 +84,9 @@
           <div class="form-group">
             <label class="col-sm-2 control-label" for="input-order_status_after_create"><?php echo $entry_order_status_after_create; ?></label>
             <div class="col-sm-10">
-              <select name="config_unitpay_order_status_id_after_create" id="input-order_status_after_create" class="form-control">
+              <select name="unitpay_order_status_id_after_create" id="input-order_status_after_create" class="form-control">
                 <?php foreach ($order_statuses as $order_status) { ?>
-                <?php if ($order_status['order_status_id'] == $config_unitpay_order_status_id_after_create) { ?>
+                <?php if ($order_status['order_status_id'] == $unitpay_order_status_id_after_create) { ?>
                 <option value="<?php echo $order_status['order_status_id']; ?>" selected="selected"><?php echo $order_status['name']; ?></option>
                 <?php } else { ?>
                 <option value="<?php echo $order_status['order_status_id']; ?>"><?php echo $order_status['name']; ?></option>
@@ -100,8 +100,8 @@
           <div class="form-group">
             <label class="col-sm-2 control-label" for="input-error_status"><?php echo $entry_set_status_after_error_payment; ?></label>
             <div class="col-sm-10">
-              <select name="config_unitpay_set_error_status" id="input-error_status" class="form-control">
-                <?php if ($config_unitpay_set_error_status) { ?>
+              <select name="unitpay_set_error_status" id="input-error_status" class="form-control">
+                <?php if ($unitpay_set_error_status) { ?>
                 <option value="1" selected="selected"><?php echo $text_enabled; ?></option>
                 <option value="0"><?php echo $text_disabled; ?></option>
                 <?php } else { ?>
@@ -115,9 +115,9 @@
           <div class="form-group">
             <label class="col-sm-2 control-label" for="input-order_status_error_payment"><?php echo $entry_order_status_error; ?></label>
             <div class="col-sm-10">
-              <select name="config_unitpay_order_status_id_error" id="input-order_status_error_payment" class="form-control">
+              <select name="unitpay_order_status_id_error" id="input-order_status_error_payment" class="form-control">
                 <?php foreach ($order_statuses as $order_status) { ?>
-                <?php if ($order_status['order_status_id'] == $config_unitpay_order_status_id_error) { ?>
+                <?php if ($order_status['order_status_id'] == $unitpay_order_status_id_error) { ?>
                 <option value="<?php echo $order_status['order_status_id']; ?>" selected="selected"><?php echo $order_status['name']; ?></option>
                 <?php } else { ?>
                 <option value="<?php echo $order_status['order_status_id']; ?>"><?php echo $order_status['name']; ?></option>
@@ -132,8 +132,8 @@
           <div class="form-group">
             <label class="col-sm-2 control-label" for="input-delete_cart"><?php echo $entry_delete_cart_after_confirm; ?></label>
             <div class="col-sm-10">
-              <select name="config_unitpay_cart_reset" id="input-delete_cart" class="form-control">
-                <?php if ($config_unitpay_cart_reset) { ?>
+              <select name="unitpay_cart_reset" id="input-delete_cart" class="form-control">
+                <?php if ($unitpay_cart_reset) { ?>
                 <option value="1" selected="selected"><?php echo $text_enabled; ?></option>
                 <option value="0"><?php echo $text_disabled; ?></option>
                 <?php } else { ?>
@@ -145,12 +145,12 @@
           </div>
 
           <div class="form-group">
-            <label class="col-sm-2 control-label" for="input-config_unitpay_geo_zone_id"><?php echo $entry_geo_zone; ?></label>
+            <label class="col-sm-2 control-label" for="input-unitpay_geo_zone_id"><?php echo $entry_geo_zone; ?></label>
             <div class="col-sm-10">
-              <select name="config_unitpay_geo_zone_id" id="input-geo_zone" class="form-control">
+              <select name="unitpay_geo_zone_id" id="input-geo_zone" class="form-control">
                 <option value="0"><?php echo $text_all_zones; ?></option>
                 <?php foreach ($geo_zones as $geo_zone) { ?>
-                  <?php if ($geo_zone['geo_zone_id'] == $config_unitpay_geo_zone_id) { ?>
+                  <?php if ($geo_zone['geo_zone_id'] == $unitpay_geo_zone_id) { ?>
                 <option value="<?php echo $geo_zone['geo_zone_id']; ?>" selected="selected"><?php echo $geo_zone['name']; ?></option>
                   <?php } else { ?>
                 <option value="<?php echo $geo_zone['geo_zone_id']; ?>"><?php echo $geo_zone['name']; ?></option>
@@ -163,8 +163,8 @@
           <div class="form-group">
             <label class="col-sm-2 control-label" for="input-status"><?php echo $entry_status; ?></label>
             <div class="col-sm-10">
-              <select name="config_unitpay_status" id="input-status" class="form-control">
-                <?php if ($config_unitpay_status) { ?>
+              <select name="unitpay_status" id="input-status" class="form-control">
+                <?php if ($unitpay_status) { ?>
                 <option value="1" selected="selected"><?php echo $text_enabled; ?></option>
                 <option value="0"><?php echo $text_disabled; ?></option>
                 <?php } else { ?>
@@ -179,7 +179,7 @@
             <label class="col-sm-2 control-label" for="input-copy_result_url"><?php echo $text_result_url; ?></label>
             <div class="col-sm-10">
               <span> <?php echo $copy_result_url; ?> </span>
-              <input type="hidden"  name="config_unitpay_result_url" value="<?php echo $copy_result_url; ?>" id="input-copy_result_url" class="form-control" />
+              <input type="hidden"  name="unitpay_result_url" value="<?php echo $copy_result_url; ?>" id="input-copy_result_url" class="form-control" />
             </div>
           </div>
 
@@ -187,7 +187,7 @@
             <label class="col-sm-2 control-label" for="input-copy_success_url"><?php echo $text_success_url; ?></label>
             <div class="col-sm-10">
                <span> <?php echo $copy_success_url; ?> </span>
-              <input type="hidden" name="config_unitpay_success_url" value="<?php echo $copy_success_url; ?>" id="input-copy_success_url" class="form-control" />
+              <input type="hidden" name="unitpay_success_url" value="<?php echo $copy_success_url; ?>" id="input-copy_success_url" class="form-control" />
             </div>
           </div>
 
@@ -195,7 +195,7 @@
             <label class="col-sm-2 control-label" for="input-copy_fail_url"><?php echo $text_fail_url; ?></label>
             <div class="col-sm-10">
                 <span> <?php echo $copy_fail_url; ?> </span>
-              <input type="hidden" name="config_unitpay_fail_url" value="<?php echo $copy_fail_url; ?>" id="input-copy_fail_url" class="form-control" />
+              <input type="hidden" name="unitpay_fail_url" value="<?php echo $copy_fail_url; ?>" id="input-copy_fail_url" class="form-control" />
             </div>
           </div>
 
