@@ -81,7 +81,7 @@ class ControllerPaymentUnitpay extends Controller {
         if ($method == 'check'){
 
             if (!$arOrder){
-                return $this->getResponseError('Unable to confirm payment database');
+                return $this->getResponseError('Can\'t find order');
             }
 
             if ($params['sum'] != $total_price){
@@ -103,7 +103,7 @@ class ControllerPaymentUnitpay extends Controller {
             }
 
             if (!$arOrder){
-                return $this->getResponseError('Unable to confirm payment database');
+                return $this->getResponseError('Can\'t find order');
             }
 
             $this->pay($params);
@@ -113,7 +113,7 @@ class ControllerPaymentUnitpay extends Controller {
 
         if ($method == 'error'){
             if (!$arOrder){
-                return $this->getResponseError('Unable to confirm payment database');
+                return $this->getResponseError('Can\'t find order');
             }
 
             if ($this->config->get('unitpay_set_error_status')){
