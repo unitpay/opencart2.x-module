@@ -22,7 +22,7 @@ class ControllerPaymentUnitpay extends Controller {
         $rur_code = 'RUB';
         $rur_order_total = $this->currency->convert($order_info['total'], $order_info['currency_code'], $rur_code);
         $data['out_summ'] = $this->currency->format($rur_order_total, $rur_code, $order_info['currency_value'], FALSE);
-        $data['out_summ'] = number_format($data['out_summ'], 2);
+        $data['out_summ'] = number_format($data['out_summ'], 2, '.', '');
 
         $data['action']="https://unitpay.ru/pay/";
 
@@ -69,7 +69,7 @@ class ControllerPaymentUnitpay extends Controller {
         $rur_code = 'RUB';
         $rur_order_total = $this->currency->convert($arOrder['total'], $arOrder['currency_code'], $rur_code);
         $total_price = $this->currency->format($rur_order_total, $rur_code, $arOrder['currency_value'], FALSE);
-        $total_price = number_format($total_price, 2);
+        $total_price = number_format($total_price, 2, '.', '');
 
 
         if ($params['signature'] != $this->getSha256SignatureByMethodAndParams(
